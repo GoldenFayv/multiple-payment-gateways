@@ -1,0 +1,17 @@
+<?php
+
+namespace Modules\PaymentCore\App\Contracts;
+
+use Modules\PaymentCore\DTOs\InitializePaymentData;
+use Modules\PaymentCore\DTOs\VerifyPaymentResultData;
+
+interface PaymentGatewayInterface
+{
+    public function initialize(InitializePaymentData $data): array;
+
+    public function verify(string $reference): VerifyPaymentResultData;
+
+    public function handleWebhook(array $payload, array $headers = []): void;
+
+    public function getCode(): string;
+}

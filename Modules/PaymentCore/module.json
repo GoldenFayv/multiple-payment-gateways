@@ -1,0 +1,11 @@
+{
+    "name": "PaymentCore",
+    "alias": "paymentcore",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PaymentCore\\Providers\\PaymentCoreServiceProvider"
+    ],
+    "files": []
+}

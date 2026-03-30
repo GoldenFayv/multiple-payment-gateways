@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/paymentcore",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PaymentCore\\": "app/",
+            "Modules\\PaymentCore\\Database\\Factories\\": "database/factories/",
+            "Modules\\PaymentCore\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\PaymentCore\\Tests\\": "tests/"
+        }
+    }
+}
