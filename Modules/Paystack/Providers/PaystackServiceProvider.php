@@ -2,10 +2,10 @@
 
 namespace Modules\Paystack\Providers;
 
-use Nwidart\Modules\Support\ModuleServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\ServiceProvider;
+use Modules\Paystack\App\Services\PaystackGateway;
 
-class PaystackServiceProvider extends ModuleServiceProvider
+class PaystackServiceProvider extends ServiceProvider
 {
     /**
      * The name of the module.

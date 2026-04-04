@@ -23,12 +23,13 @@ class InitializePayment
             'currency' => ['nullable', 'string'], //todo: Validate the currencies
             'email' => ['required', 'email'],
             'callback_url' => ['nullable', 'url'],
-            'metadata' => ['nullable', 'array']
+            'metadata' => ['nullable', 'array'],
+            'channels' => ['nullable', 'array'],
         ])->validate();
 
         $reference = $this->referenceService->generate();
-        
-        Transaction::create([
+
+        $transaction = Transaction::create([
             'gateway' => $validated['gateway'],
             'internal_reference' => $reference,
             'amount' => $validated['amount'],
@@ -44,11 +45,18 @@ class InitializePayment
             email: $validated['email'],
             reference: $reference,
             callbackUrl: $validated['callback_url'] ?? '',
-            metadata: $validated['metadata'] ?? []
+            metadata: $validated['metadata'] ?? [],
+            channels: $validated['channels'] ?? [],
         );
         $gateway = $this->gatewayManager->driver($validated['gateway']);
 
         $response = $gateway->initialize($initData);
+
+        $transaction->update([
+            'gateway_reference' => $response['gateway_reference'] ?? null,
+            'gateway_response' => $response['raw'] ?? null,
+        ]);
+
         return [
             'reference' => $reference,
             'gateway' => $validated['gateway'],

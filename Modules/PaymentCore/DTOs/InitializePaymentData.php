@@ -9,6 +9,7 @@ class InitializePaymentData
         public string $email,
         public string $reference,
         public string $callbackUrl,
-        public array $metadata = []
+        public array $metadata = [],
+        public array $channels = [],
     ) {}
 }
