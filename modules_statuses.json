@@ -1,4 +1,5 @@
 {
     "PaymentCore": true,
-    "Paystack": true
+    "Paystack": true,
+    "Merchant": true
 }

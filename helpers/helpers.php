@@ -1,0 +1,3 @@
+<?php
+require_once __DIR__ . '/response.php';
+require_once __DIR__ . '/send_mail.php';
