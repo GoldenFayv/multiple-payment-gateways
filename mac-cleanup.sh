@@ -2,6 +2,12 @@
 
 echo "🧹 Starting Mac cleanup..."
 
+# checiking system foldr
+sudo du -hxd1 /System/Volumes/Data | sort -h
+
+# checking user folder
+du -hxd1 ~ | sort -h
+
 rm -rf ~/Library/Caches/*
 rm -rf ~/Library/Logs/*
 
