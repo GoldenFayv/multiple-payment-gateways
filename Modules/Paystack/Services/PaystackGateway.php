@@ -2,6 +2,7 @@
 
 namespace Modules\Paystack\App\Services;
 
+use Illuminate\Http\Request;
 use Modules\PaymentCore\App\Contracts\PaymentGatewayInterface;
 use Modules\PaymentCore\DTOs\InitializePaymentData;
 use Modules\PaymentCore\DTOs\VerifyPaymentResultData;
@@ -63,5 +64,22 @@ class PaystackGateway implements PaymentGatewayInterface
     public function getCode(): string
     {
         return GatewayCode::PAYSTACK->value;
+    }
+
+    public function checkSignature(Request $request): bool
+    {
+        $signature = $request->header('x-paystack-signature');
+
+        if (! $signature) {
+            return false;
+        }
+
+        $computed = hash_hmac(
+            'sha512',
+            $request->getContent(),
+            (string) config('paystack.secret_key')
+        );
+
+        return hash_equals($computed, $signature);
     }
 }

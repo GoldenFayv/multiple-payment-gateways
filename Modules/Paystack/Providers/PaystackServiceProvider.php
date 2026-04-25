@@ -3,6 +3,7 @@
 namespace Modules\Paystack\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\PaymentCore\Enums\Enum\PaymentConfig;
 use Modules\Paystack\App\Services\PaystackGateway;
 
 class PaystackServiceProvider extends ServiceProvider
@@ -48,9 +49,12 @@ class PaystackServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(module_path('Paystack', 'config/config.php'), 'paystack');
 
-        $this->app->singleton('payment.gateway.paystack', function () {
+        $this->app->singleton(PaymentConfig::PAYSTACK_GATEWAY_CLASS->value, function () {
             return app(PaystackGateway::class);
         });
+        // $this->app->singleton(PaymentConfig::PAYSTACK_SIGNATURE_CHECK_CLASS->value, function () {
+        //     return app(PaystackGateway::class);
+        // });
     }
 
     public function boot(): void

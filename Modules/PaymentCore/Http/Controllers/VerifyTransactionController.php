@@ -1,11 +1,12 @@
 <?php
 namespace Modules\PaymentCore\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Modules\PaymentCore\Actions\VerifyPayment;
 
 class VerifyTransactionController
 {
-    public function __invoke(string $reference, VerifyPayment $verifyPayment)
+    public function __invoke(string $reference, VerifyPayment $verifyPayment): JsonResponse
     {
         $transaction = $verifyPayment->handle($reference);
 
