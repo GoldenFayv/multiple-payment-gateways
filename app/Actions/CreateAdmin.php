@@ -24,6 +24,7 @@ class CreateAdmin
         ])->validate();
 
         $validated['name'] = "{$validated['first_name']} {$validated['last_name']}";
+
         $admin = Admin::create(Arr::except($validated, ['first_name', 'last_name']));
 
         $code = generateCode();

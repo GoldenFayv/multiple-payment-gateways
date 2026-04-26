@@ -2,6 +2,7 @@
 
 namespace Modules\Merchant\Filament\Resources\Merchants;
 
+use App\Models\Admin;
 use Modules\Merchant\Filament\Resources\Merchants\Pages\CreateMerchant;
 use Modules\Merchant\Filament\Resources\Merchants\Pages\EditMerchant;
 use Modules\Merchant\Filament\Resources\Merchants\Pages\ListMerchants;
@@ -12,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 use Modules\Merchant\Models\Merchant;
 
 class MerchantResource extends Resource
@@ -41,10 +43,10 @@ class MerchantResource extends Resource
         ];
     }
 
-    // public static function canAccess(): bool
-    // {
-    //     return Auth::user() instanceof Admin; // only admin User, not Merchant
-    // }
+    public static function canAccess(): bool
+    {
+        return Auth::user() instanceof Admin; // only admin User, not Merchant
+    }
 
     public static function getPages(): array
     {
