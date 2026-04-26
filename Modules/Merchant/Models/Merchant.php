@@ -2,6 +2,7 @@
 
 namespace Modules\Merchant\Models;
 
+use App\Interface\User;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
@@ -18,7 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
     ['name', 'email', 'password', 'phone', 'email_verified_at', 'phone_verified_at', 'is_active', 'business_id']
 )]
 #[Hidden(['password', 'remember_token'])]
-class Merchant extends Authenticatable implements FilamentUser, HasName
+class Merchant extends Authenticatable implements FilamentUser, HasName, User
 {
     use HasFactory;
 

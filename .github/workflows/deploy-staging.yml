@@ -23,7 +23,8 @@ jobs:
           target: ${{ secrets.SSH_TARGET_DIR }}
           rm: false
           overwrite: true
-          exclude: .git
+          exclude: |
+            .git
 
       - name: Execute remote commands
         uses: appleboy/ssh-action@v1

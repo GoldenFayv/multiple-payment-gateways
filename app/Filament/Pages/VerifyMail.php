@@ -2,18 +2,23 @@
 
 namespace App\Filament\Pages;
 
-use App\Enums\CacheKey;
+use App\Actions\VerifyEmail;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
-use Filament\Pages\BasePage;
+use Filament\Pages\Page;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
-class VerifyMail extends BasePage
+class VerifyMail extends Page
 {
     protected string $view = 'filament.pages.verify-mail';
-    protected ?string $code = null;
+
+    public ?array $data = [];
+
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
 
     public function form(Schema $schema): Schema
     {
@@ -28,28 +33,14 @@ class VerifyMail extends BasePage
             ->statePath('data');
     }
 
-    public function verify(): void
+    public function verify(VerifyEmail $verifyEmail): void
     {
         $data = $this->form->getState();
-        $user = auth()->user();
+        $user = Auth::user();
 
-        $cacheKey = CacheKey::EMAIL_VERIFY->dynamicKey($user->getMorphClass(), $user->getKey());
+        $verifyEmail->handle($user, $data);
 
-        $code = Cache::get($cacheKey);
-
-        if ($code !== $data['code']) {
-            throw ValidationException::withMessages([
-                'data.code' => 'Invalid or expired verification code.',
-            ]);
-        }
-
-        Cache::forget($cacheKey);
-
-        $user->update([
-            'email_verified_at' => now(),
-        ]);
-
-        redirect()->to(filament()->getHomeUrl());
+        $this->redirect(filament()->getHomeUrl());
     }
 
     protected function getFormActions(): array
