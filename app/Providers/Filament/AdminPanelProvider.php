@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\VerifyMail;
+use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -33,9 +35,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             // ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverResources(in: module_path('Merchant', 'Filament/Admin/Resources'), for: 'Modules\\Merchant\\Filament\\Merchant\\Resources')
-            // ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\Filament\Admin\Pages')
+            // ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
+                VerifyMail::class
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\Filament\Admin\Widgets')
             ->widgets([
@@ -54,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
+                EnsureEmailIsVerified::class,
                 Authenticate::class,
             ]);
     }

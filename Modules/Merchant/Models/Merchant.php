@@ -22,6 +22,8 @@ class Merchant extends Authenticatable implements FilamentUser, HasName
 {
     use HasFactory;
 
+    protected string $morphClass = 'merchant';
+
     protected $casts = ['email_verified_at' => 'datetime', 'phone_verified_at' => 'datetime', 'password' => 'hashed'];
 
     public function activeBusiness(): BelongsTo

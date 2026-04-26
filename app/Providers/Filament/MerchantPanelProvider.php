@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -42,7 +43,7 @@ class MerchantPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverResources(in: module_path('Merchant', "Filament/Resources"), for: 'Modules\\Merchant\\Filament\\Resources')
+            ->discoverResources(in: module_path('Merchant', "Filament/Resources"), for: 'Modules\\Merchant\\Filament\\Resources\\ApiKeys')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
@@ -64,6 +65,7 @@ class MerchantPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
+                EnsureEmailIsVerified::class,
                 Authenticate::class,
             ]);
     }
