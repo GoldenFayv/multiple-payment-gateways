@@ -2,7 +2,7 @@ name: Laravel
 
 on:
   push:
-    branches: [ "deveee" ]
+    branches: [ "deveeed" ]
   pull_request:
     branches: [ "devee" ]
 
