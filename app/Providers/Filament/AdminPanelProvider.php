@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             // ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
-            ->discoverResources(in: module_path('Merchant', 'Filament/Admin/Resources'), for: 'Modules\\Merchant\\Filament\\Resources')
+            ->discoverResources(in: module_path('Merchant', 'Filament/Resources'), for: 'Modules\\Merchant\\Filament\\Resources')
             // ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,

@@ -43,7 +43,7 @@ class MerchantPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverResources(in: module_path('Merchant', "Filament/Resources"), for: 'Modules\\Merchant\\Filament\\Resources\\ApiKeys')
+            ->discoverResources(in: module_path('Merchant', "Filament/Resources/ApiKeys"), for: 'Modules\\Merchant\\Filament\\Resources\\ApiKeys')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,

@@ -16,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Modules\Merchant\Database\Factories\MerchantFactory;
 
 #[Fillable(
-    ['name', 'email', 'password', 'phone', 'email_verified_at', 'phone_verified_at', 'is_active', 'business_id']
+    ['name', 'email', 'password', 'phone', 'email_verified_at', 'phone_verified_at', 'is_active', 'active_business_id']
 )]
 #[Hidden(['password', 'remember_token'])]
 class Merchant extends Authenticatable implements FilamentUser, HasName, User

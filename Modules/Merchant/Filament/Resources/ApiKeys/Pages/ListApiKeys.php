@@ -6,6 +6,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Auth;
 use Modules\Merchant\Actions\GenerateApiKey;
 use Modules\Merchant\Filament\Resources\ApiKeys\ApiKeyResource;
 
@@ -28,7 +29,7 @@ class ListApiKeys extends ListRecords
                         ->required(),
                 ])
                 ->action(function (array $data) {
-                    $result = app(GenerateApiKey::class)->handle(auth()->activeBusiness, $data['environment'],);
+                    $result = app(GenerateApiKey::class)->handle(Auth::user()->activeBusiness, $data['environment'],);
 
                     Notification::make()
                         ->title('API Key Generated')
