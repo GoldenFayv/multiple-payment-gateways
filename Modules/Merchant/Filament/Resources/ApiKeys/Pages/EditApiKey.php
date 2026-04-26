@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\ApiKeys\Pages;
+namespace Modules\Merchant\Filament\Resources\ApiKeys\Pages;
 
-use App\Filament\Resources\ApiKeys\ApiKeyResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Modules\Merchant\Filament\Resources\ApiKeys\ApiKeyResource;
 
 class EditApiKey extends EditRecord
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use App\Models\User;
 use Modules\Merchant\Models\Merchant;
 
@@ -46,6 +47,10 @@ return [
         'merchant' => [
             'driver' => 'session',
             'provider' => 'merchants'
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins'
         ]
     ],
 
@@ -76,6 +81,11 @@ return [
             'driver' => 'eloquent',
             'model' => Merchant::class
         ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Admin::class
+        ]
     ],
 
     /*

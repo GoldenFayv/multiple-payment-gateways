@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\Merchants\Pages;
+namespace Modules\Merchant\Filament\Resources\Merchants\Pages;
 
-use App\Filament\Resources\Merchants\MerchantResource;
+
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Modules\Merchant\Filament\Resources\Merchants\MerchantResource;
 
 class ListMerchants extends ListRecords
 {

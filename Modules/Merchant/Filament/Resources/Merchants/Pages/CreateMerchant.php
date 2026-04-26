@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\Merchants\Pages;
+namespace Modules\Merchant\Filament\Resources\Merchants\Pages;
 
-use App\Filament\Resources\Merchants\MerchantResource;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\Merchant\Filament\Resources\Merchants\MerchantResource;
 
 class CreateMerchant extends CreateRecord
 {

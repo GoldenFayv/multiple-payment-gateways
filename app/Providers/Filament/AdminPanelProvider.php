@@ -6,7 +6,6 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -19,35 +18,26 @@ use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Modules\Merchant\Filament\Pages\Auth\Register;
 
-class MerchantPanelProvider extends PanelProvider
+class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('merchant')
-            ->path('merchant')
+            ->id('admin')
+            ->path('admin')
             ->login()
-            ->registration(Register::class)
-            ->authGuard('merchant')
-            ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('Settings')
-                    // ->icon('heroicon-o-cog-6-tooth')
-                    ->collapsed(),
-            ])
+            ->authGuard('admin')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverResources(in: module_path('Merchant', "Filament/Resources"), for: 'Modules\\Merchant\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            // ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
+            ->discoverResources(in: module_path('Merchant', 'Filament/Admin/Resources'), for: 'Modules\\Merchant\\Filament\\Merchant\\Resources')
+            // ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\Filament\Admin\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\Filament\Admin\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ApiKeys\Schemas;
+namespace Modules\Merchant\Filament\Resources\ApiKeys\Schemas;
 
 use Filament\Schemas\Schema;
 

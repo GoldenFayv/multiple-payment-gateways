@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\ApiKeys\Tables;
+namespace Modules\Merchant\Filament\Resources\Merchants\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Table;
 
-class ApiKeysTable
+class MerchantsTable
 {
     public static function configure(Table $table): Table
     {

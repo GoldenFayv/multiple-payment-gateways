@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\ApiKeys\Pages;
+namespace Modules\Merchant\Filament\Resources\ApiKeys\Pages;
 
-use App\Filament\Resources\ApiKeys\ApiKeyResource;
 use Filament\Resources\Pages\CreateRecord;
+use Modules\Merchant\Filament\Resources\ApiKeys\ApiKeyResource;
 
 class CreateApiKey extends CreateRecord
 {

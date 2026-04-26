@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\ApiKeys\Pages;
+namespace Modules\Merchant\Filament\Resources\ApiKeys\Pages;
 
-use App\Filament\Resources\ApiKeys\ApiKeyResource;
 use Filament\Actions\Action;
-use Filament\Actions\CreateAction;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Modules\Merchant\Actions\GenerateApiKey;
+use Modules\Merchant\Filament\Resources\ApiKeys\ApiKeyResource;
 
 class ListApiKeys extends ListRecords
 {

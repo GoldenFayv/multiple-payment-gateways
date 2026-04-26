@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Merchants\Schemas;
+namespace Modules\Merchant\Filament\Resources\Merchants\Schemas;
 
 use Filament\Schemas\Schema;
 
