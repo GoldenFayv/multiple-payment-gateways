@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\PaymentCore\Enums\Enum;
+namespace Modules\PaymentCore\Enums;
 
 enum PaymentConfig: string
 {

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('merchant_app_id')->constrained('merchant_apps')->onDelete('cascade')->cascadeOnUpdate();
+            $table->foreignId('business_id')->constrained('businesses')->onDelete('cascade')->cascadeOnUpdate();
             $table->string('public_key')->unique();
             $table->string('secret_key_hash')->unique();
-            $table->string('secret_key_hash');
+            $table->string('secret_key_last_four', 4);
             $table->string('environment');
             $table->boolean('is_active')->default(true);
             $table->timestamp('last_used_at')->nullable();

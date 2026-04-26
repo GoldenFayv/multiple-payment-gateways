@@ -31,4 +31,6 @@ rm -rf ~/Library/Trial/*
 rm -rf ~/Library/ScreenRecordings/*
 rm -rf ~/Library/Application\ Support/Caches/*
 
+rm -rf ~/Library/Android, ~/.vscode/extensions,  ~/.npm
+
 echo "✅ Cleanup complete. Restart your Mac for best results."
