@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AccountSettings;
 use App\Filament\Pages\VerifyMail;
 use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\Authenticate;
@@ -38,7 +39,8 @@ class AdminPanelProvider extends PanelProvider
             // ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
-                VerifyMail::class
+                VerifyMail::class,
+                AccountSettings::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\Filament\Admin\Widgets')
             ->widgets([

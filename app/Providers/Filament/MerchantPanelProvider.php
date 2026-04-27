@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AccountSettings;
 use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -31,12 +32,12 @@ class MerchantPanelProvider extends PanelProvider
             ->id('merchant')
             ->path('merchant')
             ->login()
+            // ->passwordReset()
             ->registration(Register::class)
             ->authGuard('merchant')
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label('Settings')
-                    // ->icon('heroicon-o-cog-6-tooth')
                     ->collapsed(),
             ])
             ->colors([
@@ -47,6 +48,7 @@ class MerchantPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
+                AccountSettings::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([

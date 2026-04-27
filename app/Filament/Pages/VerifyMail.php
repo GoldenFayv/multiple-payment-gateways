@@ -31,6 +31,7 @@ class VerifyMail extends Page
                 TextInput::make('code')
                     ->label('Verification Code')
                     ->required()
+                    ->password()
                     ->length(6),
             ])
             ->statePath('data');
