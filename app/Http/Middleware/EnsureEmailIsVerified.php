@@ -25,7 +25,7 @@ class EnsureEmailIsVerified
                 : 'filament.merchant.pages.verify-mail';
 
             // ← prevent redirect loop by checking current route
-            if ($request->routeIs($route)) {
+            if ($request->routeIs($route) || $request->routeIs('filament.*.auth.logout')) {
                 return $next($request);
             }
 
