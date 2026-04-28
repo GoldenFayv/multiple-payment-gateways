@@ -19,9 +19,9 @@ class CreateMerchant
     {
         $validated = Validator::make($payload, [
             'business_name' => ['required'],
-            'email' => ['required', 'email', Rule::unique('merchants', 'email'), Email::strict()->validateMxRecord()],
+            'email' => ['required', 'email', Rule::unique('merchants', 'email'), (new Email)->strict()->validateMxRecord()],
             'phone' => ['required', Rule::unique('merchants', 'phone')],
-            'password' => ['required', 'min:8', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
+            'password' => ['required', 'min:8', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
         ])->validate();
 
         $validated['password'] = $payload['password'];

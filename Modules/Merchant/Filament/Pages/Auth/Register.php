@@ -41,12 +41,14 @@ class Register extends BaseRegister
 
     protected function handleRegistration(array $data): Model
     {
-        // dd($data);
         try {
             return app(CreateMerchant::class)->handle($data);
         } catch (ValidationException $e) {
+            // Map the errors from 'password' to 'data.password'
             throw ValidationException::withMessages(
-                $e->errors()
+                collect($e->errors())
+                    ->mapWithKeys(fn($messages, $key) => ["data.{$key}" => $messages])
+                    ->all()
             );
         }
     }

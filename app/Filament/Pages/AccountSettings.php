@@ -21,6 +21,7 @@ class AccountSettings extends Page
     protected string $view = 'filament.pages.account-settings';
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
     protected static ?string $navigationLabel = 'Account';
+    protected static ?int $navigationSort = 2;
     protected static string|UnitEnum|null $navigationGroup = 'Settings';
 
     public string $email = '';

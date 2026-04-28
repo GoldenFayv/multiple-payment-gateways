@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 // use Modules\Merchant\Database\Factories\ApiKeyFactory;
-#[Fillable(['business_id', 'public_key', 'secret_key_hash', 'secret_key_last_four', 'environment', 'is_active', 'last_used_at'])]
+#[Fillable(['business_id', 'public_key', 'secret_key_hash', 'secret_key_last_four', 'environment', 'is_active', 'last_used_at', 'webhook_url'])]
 class ApiKey extends Model
 {
     use HasFactory;

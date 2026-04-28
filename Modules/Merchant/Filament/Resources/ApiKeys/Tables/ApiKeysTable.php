@@ -2,8 +2,7 @@
 
 namespace Modules\Merchant\Filament\Resources\ApiKeys\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -15,6 +14,8 @@ class ApiKeysTable
     {
         return $table
             ->columns([
+                TextColumn::make("environment")
+                    ->searchable(),
                 TextColumn::make('public_key')
                     ->label('Public Key')
                     ->copyable()
@@ -39,7 +40,7 @@ class ApiKeysTable
                 //
             ])
             ->recordActions([
-                // EditAction::make(),
+                EditAction::make(),
             ])
             ->toolbarActions([
                 // BulkActionGroup::make([

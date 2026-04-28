@@ -21,7 +21,7 @@ class ApiKeyResource extends Resource
 {
     protected static string|UnitEnum|null $navigationGroup = 'Settings';
     protected static ?string $navigationLabel = 'API Keys';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
     protected static ?string $model = ApiKey::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedKey;

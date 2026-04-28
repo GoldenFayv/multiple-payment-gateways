@@ -6,7 +6,6 @@ use App\Interface\User;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -16,7 +15,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
     ['name', 'email', 'password', 'phone', 'email_verified_at', 'phone_verified_at', 'is_active', 'business_id']
 )]
 #[Hidden(['password', 'remember_token'])]
-class Admin extends Authenticatable implements FilamentUser, HasName, User, MustVerifyEmail
+class Admin extends Authenticatable implements FilamentUser, HasName, User
 {
     protected string $morphClass = 'admin';
 

@@ -11,7 +11,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -90,11 +89,8 @@ class VerifyMail extends Page
     public static function canAccess(): bool
     {
         $user = Auth::user();
-        /**
-         * @var MustVerifyEmail $user
-         */
         // Ensure the user exists and check the email verification
-        return $user && ! $user->hasVerifiedEmail();
+        return $user && ! $user->email_verified_at;
     }
 
     // public function getMiddleware(): array
