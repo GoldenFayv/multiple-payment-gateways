@@ -5,11 +5,14 @@ namespace App\Filament\Pages;
 use App\Actions\SendMail;
 use App\Actions\VerifyEmail;
 use App\Enums\CacheKey;
+use App\Interface\User;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -40,7 +43,7 @@ class VerifyMail extends Page
     public function verify(VerifyEmail $verifyEmail): void
     {
         $data = $this->form->getState();
-        $user = Auth::user();
+        $user = $this->getUser();
 
         $verifyEmail->handle($user, $data);
 
@@ -49,7 +52,7 @@ class VerifyMail extends Page
 
     public function resend(SendMail $sendMail): void
     {
-        $user = Auth::user();
+        $user = $this->getUser();
 
         $code = generateCode();
 
@@ -77,6 +80,21 @@ class VerifyMail extends Page
                 ->color('gray')
                 ->action('resend'),
         ];
+    }
+
+    private function getUser(): Model&User
+    {
+        return Auth::user();
+    }
+
+    public static function canAccess(): bool
+    {
+        $user = Auth::user();
+        /**
+         * @var MustVerifyEmail $user
+         */
+        // Ensure the user exists and check the email verification
+        return $user && ! $user->hasVerifiedEmail();
     }
 
     // public function getMiddleware(): array

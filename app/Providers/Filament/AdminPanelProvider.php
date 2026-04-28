@@ -30,13 +30,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->passwordReset()
+            ->authPasswordBroker('admins')
             ->authGuard('admin')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            // ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\Filament\Admin\Resources')
             ->discoverResources(in: module_path('Merchant', 'Filament/Resources'), for: 'Modules\\Merchant\\Filament\\Resources')
-            // ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
                 VerifyMail::class,

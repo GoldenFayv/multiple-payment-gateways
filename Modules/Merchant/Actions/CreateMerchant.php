@@ -7,6 +7,8 @@ use App\Enums\CacheKey;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Email;
+use Illuminate\Validation\Rules\Password;
 use Modules\Merchant\Models\Merchant;
 
 class CreateMerchant
@@ -17,9 +19,9 @@ class CreateMerchant
     {
         $validated = Validator::make($payload, [
             'business_name' => ['required'],
-            'email' => ['required', 'email', Rule::unique('merchants', 'email')],
+            'email' => ['required', 'email', Rule::unique('merchants', 'email'), Email::strict()->validateMxRecord()],
             'phone' => ['required', Rule::unique('merchants', 'phone')],
-            // 'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
         ])->validate();
 
         $validated['password'] = $payload['password'];

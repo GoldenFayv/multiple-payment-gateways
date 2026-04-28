@@ -2,12 +2,15 @@
 
 namespace App\Filament\Pages;
 
+use App\Actions\UpdateAdmin;
+use App\Interface\User;
 use App\Models\Admin;
 use BackedEnum;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Modules\Merchant\Actions\UpdateMerchant;
@@ -27,27 +30,28 @@ class AccountSettings extends Page
 
     public function mount(): void
     {
-        $this->email = Auth::user()->email;
+        $this->email = $this->getUser()->email;
     }
 
     public function emailForm(Schema $schema): Schema
     {
-        $user = Auth::user();
+        $user = $this->getUser();
+        $isAdmin = $user instanceof Admin;
+        $table = $isAdmin ? 'admins' : 'merchants';
 
-        $table = $user instanceof Admin ? 'admins' : 'merchants';
         return $schema
             ->components([
                 TextInput::make('email')
                     ->label('Email Address')
                     ->email()
-                    ->required()
+                    ->required()->disabled($isAdmin) // ← read-only for admins
                     ->unique(
                         table: $table,
                         column: 'email',
-                        ignorable: $user
+                        ignorable: $this->getUser()
                     )
             ])
-            ->statePath('data');
+            ->statePath('');
     }
 
     public function passwordForm(Schema $schema): Schema
@@ -58,7 +62,8 @@ class AccountSettings extends Page
                     ->label('Current Password')
                     ->password()
                     ->required()
-                    ->currentPassword(),
+                // ->currentPassword()
+                ,
 
                 TextInput::make('password')
                     ->label('New Password')
@@ -72,37 +77,57 @@ class AccountSettings extends Page
                     ->password()
                     ->required(),
             ])
-            ->statePath('data');
+            ->statePath('');
     }
 
     public function updateEmail(): void
     {
-        $data = $this->emailForm->getState();
-        // $this->emailForm->validate();
+        $payload = $this->emailForm->getState();
+            // $this->emailForm->validate();
+        ;
+        $this->updateUser($payload);
 
-        app(UpdateMerchant::class)->handle(Auth::user(), $data);
         Notification::make()
             ->title('Email updated. Please verify your new email.')
             ->warning()
             ->send();
-
-        redirect()->route('filament.merchant.pages.verify-mail');
+        $route = $this->getUser() instanceof Admin
+            ? 'filament.admin.pages.verify-mail'
+            : 'filament.merchant.pages.verify-mail';
+        redirect()->route($route);
     }
 
-    // public function updatePassword(): void
-    // {
-    //     $this->passwordForm->validate();
+    public function updatePassword(): void
+    {
+        $payload = $this->passwordForm->getState();
 
-    //     auth()->user()->update([
-    //         'password' => $this->password,
-    //     ]);
+        $this->updateUser($payload);
 
-    //     $this->reset('current_password', 'password', 'password_confirmation');
+        $this->reset('current_password', 'password', 'password_confirmation');
 
-    //     Notification::make()
-    //         ->title('Password updated successfully.')
-    //         ->success()
-    //         ->send();
-    // }
+        Notification::make()
+            ->title('Password updated successfully.')
+            ->success()
+            ->send();
+    }
+
+    private function updateUser(array $data)
+    {
+        if ($this->getUser() instanceof Admin) {
+            app(UpdateAdmin::class)->handle($this->getUser(), $data);
+        } else {
+            app(UpdateMerchant::class)->handle($this->getUser(), $data);
+        }
+    }
+
+    private function getUser(): Model&User
+    {
+        return Auth::user();
+    }
+
+    protected function getForms(): array
+    {
+        return ['emailForm', 'passwordForm'];
+    }
 }
 // TODO: Before authenticating, we have to check for the key type (test or live)

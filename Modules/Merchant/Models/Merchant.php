@@ -6,12 +6,14 @@ use App\Interface\User;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 // use Modules\Merchant\Database\Factories\MerchantFactory;
 
@@ -19,9 +21,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
     ['name', 'email', 'password', 'phone', 'email_verified_at', 'phone_verified_at', 'is_active', 'active_business_id']
 )]
 #[Hidden(['password', 'remember_token'])]
-class Merchant extends Authenticatable implements FilamentUser, HasName, User
+class Merchant extends Authenticatable implements FilamentUser, HasName, User, MustVerifyEmail
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected string $morphClass = 'merchant';
 

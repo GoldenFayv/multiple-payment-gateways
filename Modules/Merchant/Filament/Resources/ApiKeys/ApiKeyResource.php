@@ -3,11 +3,14 @@
 namespace Modules\Merchant\Filament\Resources\ApiKeys;
 
 use BackedEnum;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Modules\Merchant\Filament\Resources\ApiKeys\Pages\ListApiKeys;
 use Modules\Merchant\Filament\Resources\ApiKeys\Schemas\ApiKeyForm;
 use Modules\Merchant\Filament\Resources\ApiKeys\Tables\ApiKeysTable;
@@ -57,5 +60,26 @@ class ApiKeyResource extends Resource
         return parent::getEloquentQuery()->whereHas('business', function ($query) {
             $query->where('business_id', auth('merchant')->user()->active_business_id);
         });
+    }
+
+    public static function canAccess(): bool
+    {
+        $panelId = Filament::getCurrentPanel()?->getId();
+
+        $user = Auth::user();
+        if ($panelId !== 'merchant') {
+            Log::warning('Unauthorized access attempt to ApiKeyResource', [
+                'user_id'    => $user->getAuthIdentifier(),
+                'user_type'  => $user->getMorphClass(),
+                'panel'      => $panelId,
+                'ip'         => request()->ip(),
+                'user_agent' => request()->userAgent(),
+                'timestamp'  => now()->toDateTimeString(),
+            ]);
+
+            return false;
+        }
+
+        return true;
     }
 }

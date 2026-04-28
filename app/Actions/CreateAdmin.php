@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class CreateAdmin
 {
@@ -20,7 +21,7 @@ class CreateAdmin
             'last_name' => ['required'],
             'email' => ['required', 'email', Rule::unique('admins', 'email'), Rule::unique('merchants', 'email')],
             'phone' => ['required'],
-            'password' => ['required', 'min:8', 'confirmed']
+            'password' => ['required', 'min:8', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()->symbols()]
         ])->validate();
 
         $validated['name'] = "{$validated['first_name']} {$validated['last_name']}";

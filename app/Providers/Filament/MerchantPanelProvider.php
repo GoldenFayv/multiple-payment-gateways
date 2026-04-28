@@ -32,7 +32,8 @@ class MerchantPanelProvider extends PanelProvider
             ->id('merchant')
             ->path('merchant')
             ->login()
-            // ->passwordReset()
+            ->passwordReset()
+            ->authPasswordBroker('merchants')
             ->registration(Register::class)
             ->authGuard('merchant')
             ->navigationGroups([

@@ -3,7 +3,8 @@
 namespace Modules\Merchant\Providers;
 
 use Nwidart\Modules\Support\ModuleServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Modules\Merchant\Models\Merchant;
 
 class MerchantServiceProvider extends ModuleServiceProvider
 {
@@ -43,4 +44,11 @@ class MerchantServiceProvider extends ModuleServiceProvider
     // {
     //     $schedule->command('inspire')->hourly();
     // }
+
+    public function boot(): void
+    {
+        Relation::morphMap([
+            'merchant' => Merchant::class
+        ]);
+    }
 }
