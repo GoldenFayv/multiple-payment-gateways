@@ -17,6 +17,7 @@ class Transaction extends Model
      */
     protected $fillable = [
         'merchant_id',
+        "business_id",
         'gateway',
         'internal_reference',
         'gateway_reference',

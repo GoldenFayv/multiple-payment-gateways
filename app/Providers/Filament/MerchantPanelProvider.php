@@ -8,8 +8,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationGroup;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -22,6 +22,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Modules\Merchant\Filament\Pages\Auth\Register;
+use Modules\Merchant\Filament\Pages\Dashboard;
 
 class MerchantPanelProvider extends PanelProvider
 {
@@ -35,7 +36,6 @@ class MerchantPanelProvider extends PanelProvider
             ->passwordReset()
             ->authPasswordBroker('merchants')
             ->registration(Register::class)
-            ->emailVerification()
             ->authGuard('merchant')
             ->navigationGroups([
                 NavigationGroup::make()
@@ -46,11 +46,18 @@ class MerchantPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             // ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverResources(in: module_path('Merchant', "Filament/Resources/ApiKeys"), for: 'Modules\\Merchant\\Filament\\Resources\\ApiKeys')
+            ->discoverResources(in: module_path('Merchant', "Filament/Resources"), for: 'Modules\\Merchant\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
                 AccountSettings::class,
+                // SwitchBusiness::class,
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Switch Business')
+                    ->icon('heroicon-o-arrows-right-left')
+                // ->url(fn() => SwitchBusiness::getUrl()),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
@@ -69,8 +76,8 @@ class MerchantPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                EnsureEmailIsVerified::class,
                 Authenticate::class,
+                EnsureEmailIsVerified::class,
             ]);
     }
 }

@@ -20,7 +20,7 @@ class MerchantResource extends Resource
 {
     protected static ?string $model = Merchant::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCircleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     // protected static ?string $navigationLabel = 'Developers';
 

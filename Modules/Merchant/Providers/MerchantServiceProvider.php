@@ -50,5 +50,6 @@ class MerchantServiceProvider extends ModuleServiceProvider
         Relation::morphMap([
             'merchant' => Merchant::class
         ]);
+        $this->loadViewsFrom(module_path('Merchant', 'resources/views'), 'merchant');
     }
 }

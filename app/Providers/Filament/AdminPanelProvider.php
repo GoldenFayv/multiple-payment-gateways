@@ -59,8 +59,8 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                EnsureEmailIsVerified::class,
                 Authenticate::class,
+                EnsureEmailIsVerified::class,
             ]);
     }
 }
