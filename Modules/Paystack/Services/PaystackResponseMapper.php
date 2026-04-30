@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Paystack\App\Services;
+namespace Modules\Paystack\Services;
 
 use Modules\PaymentCore\Enums\Enum\PaymentStatus;
 

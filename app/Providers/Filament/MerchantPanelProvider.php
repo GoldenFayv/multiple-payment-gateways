@@ -57,7 +57,7 @@ class MerchantPanelProvider extends PanelProvider
                 MenuItem::make()
                     ->label('Switch Business')
                     ->icon('heroicon-o-arrows-right-left')
-                // ->url(fn() => SwitchBusiness::getUrl()),
+                    ->url(fn() => Dashboard::getUrl()),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([

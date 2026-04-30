@@ -7,9 +7,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\PaymentCore\Actions\InitializePayment;
+use Modules\PaymentCore\Http\Concerns\ResolvesApiContext;
 
 class PaymentController extends Controller
 {
+    use ResolvesApiContext;
     public function __construct(
         protected InitializePayment $initializePayment
     ) {}
@@ -20,7 +22,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         return DB::transaction(function () use ($request): JsonResponse {
-            $response = $this->initializePayment->handle($request->all());
+            $response = $this->initializePayment->handle($this->getApiKey(), $request->all());
 
             return successResponse("Payment link", $response);
         });

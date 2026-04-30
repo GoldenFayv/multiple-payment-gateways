@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\PaymentCore\App\Contracts;
+namespace Modules\PaymentCore\Contracts;
 
 use Illuminate\Http\Request;
 use Modules\PaymentCore\DTOs\InitializePaymentData;

@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Paystack\App\Services;
+namespace Modules\Paystack\Services;
 
 use Illuminate\Http\Request;
-use Modules\PaymentCore\App\Contracts\PaymentGatewayInterface;
+use Modules\PaymentCore\Contracts\PaymentGatewayInterface;
 use Modules\PaymentCore\DTOs\InitializePaymentData;
 use Modules\PaymentCore\DTOs\VerifyPaymentResultData;
 use Modules\PaymentCore\Enums\Enum\GatewayCode;
+use Modules\Paystack\Services\PaystackResponseMapper;
 use Modules\Paystack\Services\PaystackClient;
 
 class PaystackGateway implements PaymentGatewayInterface

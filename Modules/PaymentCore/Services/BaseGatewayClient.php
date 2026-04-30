@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\PaymentCore\App\Services;
+namespace Modules\PaymentCore\Services;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;

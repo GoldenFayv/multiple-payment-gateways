@@ -4,7 +4,7 @@ namespace Modules\Paystack\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\PaymentCore\Enums\PaymentConfig;
-use Modules\Paystack\App\Services\PaystackGateway;
+use Modules\Paystack\Services\PaystackGateway;
 
 class PaystackServiceProvider extends ServiceProvider
 {

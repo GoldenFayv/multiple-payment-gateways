@@ -4,10 +4,10 @@ namespace Modules\PaymentCore\Actions;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Modules\Merchant\Models\ApiKey;
 use Modules\PaymentCore\DTOs\InitializePaymentData;
 use Modules\PaymentCore\Enums\Enum\GatewayCode;
 use Modules\PaymentCore\Enums\Enum\PaymentStatus;
-use Modules\PaymentCore\Models\Transaction;
 use Modules\PaymentCore\Services\GatewayManager;
 use Modules\PaymentCore\Services\TransactionReferenceService;
 
@@ -15,7 +15,7 @@ class InitializePayment
 {
     public function __construct(protected GatewayManager $gatewayManager, protected TransactionReferenceService $referenceService) {}
 
-    public function handle(array $payload): array
+    public function handle(ApiKey $apiKey, array $payload): array
     {
         $validated = Validator::make($payload, [
             'gateway' => ['required', Rule::enum(GatewayCode::class)],
@@ -29,24 +29,27 @@ class InitializePayment
 
         $reference = $this->referenceService->generate();
 
-        $transaction = Transaction::create([
+        $transaction = $apiKey->transactions()->create([
+            'merchant_id' => $apiKey->merchant->id,
+            'business_id' => $apiKey->business_id,
+            'environment' => $apiKey->environment,
             'gateway' => $validated['gateway'],
             'internal_reference' => $reference,
             'amount' => $validated['amount'],
-            'currency' => $validated['currency'],
+            'currency' => $validated['currency'] ?? "NGN",
             'customer_email' => $validated['email'],
             'status' => PaymentStatus::PENDING,
             'callback_url' => $validated['callback_url'] ?? null,
             'metadata' => $validated['metadata'] ?? [],
         ]);
         $initData = new InitializePaymentData(
-            amount: $validated['amount'],
-            currency: $validated['currency'],
-            email: $validated['email'],
+            amount: $transaction->amount,
+            currency: $transaction->currency,
+            email: $transaction->customer_email,
             reference: $reference,
-            callbackUrl: $validated['callback_url'] ?? '',
-            metadata: $validated['metadata'] ?? [],
-            channels: $validated['channels'] ?? [],
+            callbackUrl: $transaction->callback_url ?? '',
+            metadata: $transaction->metadata ?? [],
+            channels: $transaction->channels ?? [],
         );
         $gateway = $this->gatewayManager->driver($validated['gateway']);
 

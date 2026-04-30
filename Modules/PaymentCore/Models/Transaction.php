@@ -5,6 +5,7 @@ namespace Modules\PaymentCore\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\PaymentCore\Enums\Enum\PaymentStatus;
+use Modules\PaymentCore\Enums\Environment;
 
 // use Modules\PaymentCore\Database\Factories\TransactionFactory;
 
@@ -29,6 +30,8 @@ class Transaction extends Model
         'metadata',
         'gateway_response',
         'paid_at',
+        'api_key_id',
+        'environment'
     ];
 
     protected $casts = [
@@ -36,6 +39,7 @@ class Transaction extends Model
         'gateway_response' => 'array',
         'paid_at' => 'datetime',
         'status' => PaymentStatus::class,
+        'environment' => Environment::class
     ];
 
     // protected static function newFactory(): TransactionFactory

@@ -29,6 +29,9 @@ class TransactionsTable
                     ->label('Gateway')
                     ->badge(),
 
+                TextColumn::make('environment')
+                    ->badge(),
+
                 TextColumn::make('amount')
                     ->label('Amount')
                     ->formatStateUsing(

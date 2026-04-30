@@ -2,16 +2,16 @@
 
 namespace Modules\PaymentCore\Services;
 
-use Modules\PaymentCore\App\Contracts\PaymentGatewayInterface;
-use Modules\PaymentCore\Exceptions\UnsupportedGatewayException;
+use Modules\PaymentCore\Contracts\PaymentGatewayInterface;
+use Modules\PaymentCore\Enums\PaymentConfig;
 
 class GatewayManager
 {
     public function driver(string $gateway): PaymentGatewayInterface
     {
         return match ($gateway) {
-            'paystack' => app('payment.gateway.paystack'),
-            'flutterwave' => app('payment.gateway.flutterwave'),
+            'paystack' => app(PaymentConfig::PAYSTACK_GATEWAY_CLASS->value),
+            // 'flutterwave' => app(PaymentConfig::FL),
             // default => throw new UnsupportedGatewayException(),
         };
     }

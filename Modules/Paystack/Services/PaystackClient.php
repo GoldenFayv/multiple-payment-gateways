@@ -2,7 +2,7 @@
 
 namespace Modules\Paystack\Services;
 
-use Modules\PaymentCore\App\Services\BaseGatewayClient;
+use Modules\PaymentCore\Services\BaseGatewayClient;
 
 class PaystackClient extends BaseGatewayClient
 {
