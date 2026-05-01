@@ -1,0 +1,11 @@
+{
+    "name": "Flutterwave",
+    "alias": "flutterwave",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Flutterwave\\Providers\\FlutterwaveServiceProvider"
+    ],
+    "files": []
+}

@@ -1,5 +1,6 @@
 {
     "PaymentCore": true,
     "Paystack": true,
-    "Merchant": true
+    "Merchant": true,
+    "Flutterwave": true
 }

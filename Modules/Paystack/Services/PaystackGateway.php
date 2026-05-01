@@ -52,7 +52,7 @@ class PaystackGateway implements PaymentGatewayInterface
             status: $this->mapper->mapStatus($gatewayStatus),
             gatewayReference: data_get($response, 'data.reference'),
             message: data_get($response, 'message'),
-            raw: $response,
+            raw: data_get($response, 'data'),
         );
     }
 

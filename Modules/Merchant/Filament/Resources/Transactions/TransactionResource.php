@@ -9,8 +9,6 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Modules\Merchant\Filament\Resources\Transactions\Pages\CreateTransaction;
-use Modules\Merchant\Filament\Resources\Transactions\Pages\EditTransaction;
 use Modules\Merchant\Filament\Resources\Transactions\Pages\ListTransactions;
 use Modules\Merchant\Filament\Resources\Transactions\Schemas\TransactionForm;
 use Modules\Merchant\Filament\Resources\Transactions\Tables\TransactionsTable;
@@ -59,8 +57,6 @@ class TransactionResource extends Resource
     {
         return [
             'index' => ListTransactions::route('/'),
-            'create' => CreateTransaction::route('/create'),
-            'edit' => EditTransaction::route('/{record}/edit'),
         ];
     }
 }

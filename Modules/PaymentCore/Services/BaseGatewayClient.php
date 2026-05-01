@@ -2,10 +2,10 @@
 
 namespace Modules\PaymentCore\Services;
 
+use App\Exceptions\CustomRuntimeException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use RuntimeException;
 
 abstract class BaseGatewayClient
 {
@@ -44,11 +44,8 @@ abstract class BaseGatewayClient
     protected function handleResponse(Response $response): array
     {
         if ($response->failed()) {
-            throw new RuntimeException(
-                $response->json('message')
-                    ?? $response->body()
-                    ?? 'Gateway request failed.'
-            );
+
+            throw new CustomRuntimeException($response->json('message'));
         }
 
         return $response->json();

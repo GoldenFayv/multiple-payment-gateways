@@ -11,7 +11,7 @@ class GatewayManager
     {
         return match ($gateway) {
             'paystack' => app(PaymentConfig::PAYSTACK_GATEWAY_CLASS->value),
-            // 'flutterwave' => app(PaymentConfig::FL),
+            'flutterwave' => app(PaymentConfig::FLUTTER_GATEWAY_CLASS->value),
             // default => throw new UnsupportedGatewayException(),
         };
     }

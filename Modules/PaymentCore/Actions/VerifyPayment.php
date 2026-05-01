@@ -10,10 +10,8 @@ use RuntimeException;
 
 class VerifyPayment
 {
-    public function __construct(protected GatewayManager $gatewayManager)
-    {
-        throw new \Exception('Not implemented');
-    }
+    public function __construct(protected GatewayManager $gatewayManager) {}
+
     public function handle(string $reference)
     {
         $transaction = Transaction::query()
