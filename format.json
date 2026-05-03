@@ -1,41 +1,36 @@
 {
-  "status": "success",
-  "message": "Transaction fetched successfully",
-  "data": {
-    "id": 288200108,
-    "tx_ref": "LiveCardTest",
-    "flw_ref": "YemiDesola/FLW275407301",
-    "device_fingerprint": "N/A",
-    "amount": 100,
-    "currency": "NGN",
-    "charged_amount": 100,
-    "app_fee": 1.4,
-    "merchant_fee": 0,
-    "processor_response": "Approved by Financial Institution",
-    "auth_model": "PIN",
-    "ip": "::ffff:10.5.179.3",
-    "narration": "CARD Transaction ",
-    "status": "successful",
-    "payment_type": "card",
-    "created_at": "2020-07-15T14:31:16.000Z",
-    "account_id": 17321,
-    "card": {
-      "first_6digits": "232343",
-      "last_4digits": "4567",
-      "issuer": "FIRST CITY MONUMENT BANK PLC",
-      "country": "NIGERIA NG",
-      "type": "VERVE",
-      "token": "flw-t1nf-4676a40c7ddf5f12scr432aa12d471973-k3n",
-      "expiry": "02/23"
+    "id": 10201334,
+    "ip": "52.209.154.143",
+    "meta": {
+        "bankcode": "044",
+        "bankname": "Access Bank",
+        "originatorname": "JOHN DOE",
+        "originatoramount": "N/A",
+        "__CheckoutInitAddress": "N/A",
+        "originatoraccountnumber": "123*******90",
+        "__FingerprintConfidenceScore": "0.5"
     },
-    "meta": null,
-    "amount_settled": 98.6,
+    "amount": 200000,
+    "status": "successful",
+    "tx_ref": "TXN_20260503194945_IMOSSIBT",
+    "app_fee": 2800,
+    "flw_ref": "3343180942961777837799666",
+    "currency": "NGN",
     "customer": {
-      "id": 216519823,
-      "name": "Yemi Desola",
-      "phone_number": "N/A",
-      "email": "user@gmail.com",
-      "created_at": "2020-07-15T14:31:15.000Z"
-    }
-  }
+        "id": 3515894,
+        "name": "Favour Ekechukwu",
+        "email": "ravesb_4957041c27b346674c6e_favour.e2002@gmail.com",
+        "created_at": "2026-05-03T13:11:08.000Z",
+        "phone_number": "08012345678"
+    },
+    "narration": "Favour Ekechukwu",
+    "account_id": 2715423,
+    "auth_model": "AUTH",
+    "created_at": "2026-05-03T19:50:09.000Z",
+    "merchant_fee": 0,
+    "payment_type": "bank_transfer",
+    "amount_settled": 197200,
+    "charged_amount": 200000,
+    "device_fingerprint": "3916205b49492368d1aeb462268d604c169c5b31760bcb99c4a0eef9215717ee",
+    "processor_response": "success"
 }

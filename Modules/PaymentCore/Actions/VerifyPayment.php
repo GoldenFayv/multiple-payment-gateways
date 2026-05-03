@@ -2,6 +2,7 @@
 
 namespace Modules\PaymentCore\Actions;
 
+use App\Exceptions\CustomRuntimeException;
 use Carbon\Carbon;
 use Modules\PaymentCore\Enums\Enum\PaymentStatus;
 use Modules\PaymentCore\Models\Transaction;
@@ -12,14 +13,14 @@ class VerifyPayment
 {
     public function __construct(protected GatewayManager $gatewayManager) {}
 
-    public function handle(string $reference)
+    public function handle(string $reference): Transaction
     {
         $transaction = Transaction::query()
             ->where('internal_reference', $reference)
             ->first();
 
         if (! $transaction) {
-            throw new RuntimeException('Transaction not found.');
+            throw new CustomRuntimeException('Transaction not found.');
         }
 
         $gateway = $this->gatewayManager->driver($transaction->gateway);

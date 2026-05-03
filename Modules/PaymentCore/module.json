@@ -5,7 +5,8 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\PaymentCore\\Providers\\PaymentCoreServiceProvider"
+        "Modules\\PaymentCore\\Providers\\PaymentCoreServiceProvider",
+        "Modules\\PaymentCore\\Providers\\RouteServiceProvider"
     ],
     "files": []
 }

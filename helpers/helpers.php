@@ -13,3 +13,12 @@ function generateCode(int $length = 6): string
 
     return $code;
 }
+
+if (!function_exists('mydd')) {
+    function mydd(mixed $data): never
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        die();
+    }
+}

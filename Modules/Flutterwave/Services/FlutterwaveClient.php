@@ -14,7 +14,7 @@ class FlutterwaveClient extends BaseGatewayClient
     protected function headers(): array
     {
         return [
-            "Authorization" => "Bearer " . config("flutterwae.secret_key"),
+            "Authorization" => "Bearer " . config("flutterwave.secret_key"),
             "Accept" => "application/json",
             "Content-Type" => "application/json",
         ];
@@ -25,8 +25,8 @@ class FlutterwaveClient extends BaseGatewayClient
         return $this->post($url, $payload);
     }
 
-    public function verifyTransaction(string $url): array
+    public function verifyTransaction(string $url, array $params = []): array
     {
-        return $this->get($url);
+        return $this->get($url, $params);
     }
 }

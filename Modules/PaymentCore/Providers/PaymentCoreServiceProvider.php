@@ -36,11 +36,24 @@ class PaymentCoreServiceProvider extends ModuleServiceProvider
 
     /**
      * Define module schedules.
-     * 
+     *
      * @param $schedule
      */
     // protected function configureSchedules(Schedule $schedule): void
     // {
     //     $schedule->command('inspire')->hourly();
     // }
+
+    public function register(): void
+    {
+        $this->mergeConfigFrom(module_path('PaymentCore', 'config/config.php'), 'payment');
+
+    }
+
+    public function boot(): void
+    {
+        $this->publishes([
+            module_path('PaymentCore', 'config/config.php') => config_path('payment.php'),
+        ], 'payment-config');
+    }
 }

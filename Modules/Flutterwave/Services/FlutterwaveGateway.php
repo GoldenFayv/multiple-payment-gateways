@@ -12,6 +12,7 @@ class FlutterwaveGateway implements PaymentGatewayInterface
 {
     public function __construct(public FlutterwaveClient $client, public FlutterwaveResponseMapper $mapper) {}
 
+    #[Override]
     public function initialize(InitializePaymentData $initializePaymentData): array
     {
         $payload = [
@@ -21,7 +22,8 @@ class FlutterwaveGateway implements PaymentGatewayInterface
             "customer" => [
                 "email" => $initializePaymentData->email
             ],
-            'meta' => $initializePaymentData->metadata
+            'meta' => $initializePaymentData->metadata,
+            'redirect_url' => $initializePaymentData->callbackUrl
         ];
 
         $channels = implode(',', $initializePaymentData->channels);
@@ -38,7 +40,7 @@ class FlutterwaveGateway implements PaymentGatewayInterface
     #[Override]
     public function verify(string $reference): VerifyPaymentResultData
     {
-        $response = $this->client->verifyTransaction("transactions/$reference/verify");
+        $response = $this->client->verifyTransaction("transactions/verify_by_reference", ["tx_ref" => $reference]);
         $gatewayStatus = data_get($response, 'data.status');
         return new VerifyPaymentResultData(
             status: $this->mapper->mapStatus($gatewayStatus),

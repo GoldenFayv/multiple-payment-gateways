@@ -8,7 +8,7 @@ use Modules\PaymentCore\DTOs\VerifyPaymentResultData;
 
 interface PaymentGatewayInterface
 {
-    public function initialize(InitializePaymentData $data): array;
+    public function initialize(InitializePaymentData $initializePaymentData): array;
 
     public function verify(string $reference): VerifyPaymentResultData;
 

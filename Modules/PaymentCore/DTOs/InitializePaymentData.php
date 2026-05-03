@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\PaymentCore\DTOs;
+
 class InitializePaymentData
 {
     public function __construct(
@@ -8,8 +9,10 @@ class InitializePaymentData
         public string $currency,
         public string $email,
         public string $reference,
-        public string $callbackUrl,
+        public string $callbackUrl = '',
         public array $metadata = [],
         public array $channels = [],
-    ) {}
+    ) {
+        $this->callbackUrl = url('/api/v1/payments/callback');
+    }
 }
