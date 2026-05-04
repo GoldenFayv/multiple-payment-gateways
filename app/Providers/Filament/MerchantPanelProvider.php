@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\AccountSettings;
+use App\Filament\Widgets\CustomInfoWidget;
 use App\Http\Middleware\EnsureEmailIsVerified;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -62,7 +63,8 @@ class MerchantPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+//                FilamentInfoWidget::class,
+                CustomInfoWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->mergeConfigFrom(config_path("config.php"), 'app');
     }
 
     /**
